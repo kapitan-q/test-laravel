@@ -1,0 +1,7 @@
+<template>
+    
+    Vue Init
+
+</template>
+
+
