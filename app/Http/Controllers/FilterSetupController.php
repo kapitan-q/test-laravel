@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\DataRepository;
+use Illuminate\Http\JsonResponse;
 use App\Repositories\Interfaces\DataRepositoryInterface;
 
 class FilterSetupController extends Controller
@@ -14,7 +14,7 @@ class FilterSetupController extends Controller
         $this->dataRepository = $dataRepository;
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json([
             'priceRange' => $this->dataRepository->getPriceRange()
