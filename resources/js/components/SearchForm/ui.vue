@@ -19,8 +19,8 @@
                 <el-input-number v-model="model.garages" :disabled="processing" />
             </el-form-item>
 
-            <el-form-item label="Object price">
-                <el-slider v-model="model.price" range :disabled="processing" />
+            <el-form-item label="Object price" v-if="!isSettingFetching">
+                <el-slider v-model="model.price" range :disabled="processing" :min="settings?.priceRange?.min" :max="settings?.priceRange?.max" />
             </el-form-item>
         </el-form>
 
@@ -33,8 +33,9 @@
 
 <script lang="ts" setup>
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Model } from './types'
+import { useApiFilterSetup } from '../../composables/api'
 
 const props = withDefaults(defineProps<{
     model: Model,
@@ -43,7 +44,9 @@ const props = withDefaults(defineProps<{
     processing: false
 })
 
-const emit = defineEmits(['search'])
+const emit  = defineEmits(['search'])
+
+const { data:settings, isFetching:isSettingFetching } = useApiFilterSetup()
 
 </script>
 
